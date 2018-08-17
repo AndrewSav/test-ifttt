@@ -19,11 +19,9 @@ Settings you will need to proivde:
 - STATIC="static.domain.tld" - your static site domain
 - WEBHOOK="webhook.domain.tld" - your webhook domain
 
-This setup depends on two custom docker images:
-- [For the website](docker/microbot)
-- [For the webhook](docker/webhook)
+This setup depends on a custom docker image: [static website](docker/microbot)
 
-The two container need to be built and pushed to a public registry. I'm using `andrewsav\microbot` and `andrewsav\webhook` images respectivly, you will need to changes these names if you want to build your own.
+The container need to be built and pushed to a public registry. I'm using `andrewsav\microbot` images respectivly, you will need to changes this names if you want to build your own.
 
 Steps to get this up and running:
 

@@ -31,7 +31,7 @@ services:
       - traefik.protocol=http
       - traefik.frontend.rule=Host:static.domain.tld
   webhook:
-    image: andrewsav/webhook
+    image: almir/webhook
     restart: unless-stopped
     networks:
       - webgateway

@@ -1,6 +1,4 @@
-#!/bin/bash
-
-shopt -s nocasematch
+#!/bin/sh
 
 case "$1" in
  "start" ) touch /control/success;;
