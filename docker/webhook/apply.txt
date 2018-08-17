@@ -1,2 +1,0 @@
-docker build --rm=true --no-cache=true --pull=true -t andrewsav/webhook .
-docker push andrewsav/webhook

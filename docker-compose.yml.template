@@ -20,6 +20,8 @@ services:
   microbot:
     image: andrewsav/microbot
     restart: unless-stopped
+    volumes:
+      - static-content:/usr/share/nginx/html/data
     networks:
       - webgateway
     labels:
@@ -42,7 +44,10 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /mnt/webhook:/data
+      - static-content:/control
     command: ["-verbose","-hooks=/data/hooks.yml"]
 networks:
   webgateway:
     driver: bridge
+volumes:
+  static-content:

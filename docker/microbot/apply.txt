@@ -1,4 +1,0 @@
-docker build --rm=true --no-cache=true --pull=true -t andrewsav/microbot .
-docker run --rm --name microbot -d -p "8080:80" andrewsav/microbot
-docker rm microbot -f
-docker push andrewsav/microbot
