@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#Url for Let's Encript Certificates registration
+EMAIL="mail@domain.tld"
+
+#Domain where the web site will be hosted (port 443)
+STATIC="static.domain.tld"
+
+#Domain where the web site will be hosted (port 443)
+WEBHOOK="webhook.domain.tld"

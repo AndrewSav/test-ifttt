@@ -1,0 +1,27 @@
+defaultEntryPoints = ["http", "https"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
+
+[acme]
+#caServer = "https://acme-staging.api.letsencrypt.org/directory"
+email = "mail@domain.tld"
+storage = "/etc/traefik/acme/acme.json"
+entryPoint = "https"
+
+[acme.httpChallenge]
+  entryPoint = "http"
+
+[[acme.domains]]
+  main = "static.domain.tld"
+  sans = ["webhook.domain.tld"]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+exposedbydefault = false

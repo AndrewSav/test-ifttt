@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+  proxy:
+    image: traefik
+    command: --web --docker
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/traefik/traefik.toml:/traefik.toml
+      - /mnt/traefik/acme:/etc/traefik/acme
+    labels:
+      - traefik.enable=false
+    networks:
+      - webgateway
+  microbot:
+    image: andrewsav/microbot
+    restart: unless-stopped
+    networks:
+      - webgateway
+    labels:
+      - traefik.docker.network=test-ifttt_webgateway
+      - traefik.enable=true
+      - traefik.port=80
+      - traefik.protocol=http
+      - traefik.frontend.rule=Host:static.domain.tld
+  webhook:
+    image: andrewsav/webhook
+    restart: unless-stopped
+    networks:
+      - webgateway
+    labels:
+      - traefik.docker.network=test-ifttt_webgateway
+      - traefik.enable=true
+      - traefik.port=9000
+      - traefik.protocol=http
+      - traefik.frontend.rule=Host:webhook.domain.tld
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/webhook:/data
+    command: ["-verbose","-hooks=/data/hooks.yml"]
+networks:
+  webgateway:
+    driver: bridge

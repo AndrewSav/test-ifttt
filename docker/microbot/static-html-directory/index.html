@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <style type="text/css">
+    .centered
+      {
+      text-align:center;
+      margin-top:0px;
+      margin-bottom:0px;
+      padding:0px;
+      }
+  </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script>
+    $(function(){
+
+       var wasDown = false;
+       function blip() {
+          $.ajax({
+              url: "success",
+              success: function() {
+                 $("i").addClass("fa-smile");
+                 $("i").addClass("text-success");
+                 $("i").removeClass("fa-frown");
+                 $("i").removeClass("text-danger");
+                 if (wasDown) {
+                     wasDown = false;
+                     location.reload();
+                 }
+              },
+              error: function() {
+                 wasDown = true;
+                 $("i").addClass("fa-frown");
+                 $("i").addClass("text-danger");
+                 $("i").removeClass("fa-smile");
+                 $("i").removeClass("text-success");
+              }
+           });
+         }    
+         setInterval(function() {
+           blip();
+         }, 1000);
+        
+    });
+  </script>
+  <body>
+    <p class="centered"><i class="fas fa-smile fa-10x text-success"></i></p>
+    <p class="centered">Container hostname: XXX</p>
+  </body>
+</html>

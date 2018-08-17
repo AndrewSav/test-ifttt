@@ -1,0 +1,6 @@
+- id: microbot
+  execute-command: /data/microbot.sh
+  response-message: OK
+  pass-arguments-to-command:
+  - source: url
+    name: action
